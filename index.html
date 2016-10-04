@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!--bower:js-->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/jquery-3.1.0.min/index.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<!-- endbower -->
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body class="bg-success" ng-controller= "MainController">
+	<div class= "container">
+		<div class= "panel panel-primary">
+
+		<div class= "lead text-center panel-heading">Not So Simple Todo App</div>
+
+			<div class= "text-center panel-body">
+			
+			<!-- Entering items -->
+					<div class= "row">
+						<div class= "text-center">
+							<label>Task:</label>
+							<dev>
+								<input type= text id= "inputBox" ng-model="newText"></input>
+							</dev>
+							<label class="">Priority:</label>
+								<select class= id= "priorityList" 
+								ng-init="selectedOption = options[0]" 
+								ng-model="selectedOption" 
+								ng-options= "option.number as option.priority for option in options">
+								</select>
+								<br>
+								<br>
+							
+							</div>
+								<div class= "panel-info">
+									<button class="btn btn-primary" id="submitButton" value= "Submit" 
+									ng-click="addNewToDo(event)"> Add Event</button>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+
+<!-- sorting the tasks -->
+
+<div id="priorityRank" class= "form-group text-center ">
+	<a class="btn btn-primary" ng-click= "sortField='number'; reverse = !reverse">Order by Priority</a>
+	<a class="btn btn-primary" ng-click= "sortField='newEvent'; reverse = !reverse">Order Alphabetically</a>
+</div>
+
+<br>
+
+<div class= "container">
+	<div class= "panel panel-primary">
+		<div class= "lead panel-heading">ToDo List:</div>
+			<table class= "table">
+
+			<!-- Assigning color to prioroity  -->
+
+				
+			    <tr  ng-repeat="cycle in todos | orderBy: sortField: reverse">
+			        <td ng-class="{'bg-info': cycle.number==0, 'bg-warning': cycle.number==1, 'bg-danger': cycle.number==2}">
+			        {{cycle.newEvent}}
+			        </td>
+			      
+			    
+			</table>
+
+		</div>
+	</div>
+</div>
+
+<!--inject:js-->
+<script src="/app/js/index.js"></script>
+<!--endinject-->
+</body>
+</html>
